@@ -1,0 +1,16 @@
+PODS:
+  - YFEncrypt (0.1.0)
+
+DEPENDENCIES:
+  - YFEncrypt (from `../`)
+
+EXTERNAL SOURCES:
+  YFEncrypt:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  YFEncrypt: 7d9e29342cd0575050dad514641f6b78f57c957e
+
+PODFILE CHECKSUM: 1ee44a682cee2bf81678e75ee97f9ef647537cb0
+
+COCOAPODS: 1.9.3

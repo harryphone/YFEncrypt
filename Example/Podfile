@@ -1,0 +1,13 @@
+use_frameworks!
+
+platform :ios, '8.0'
+
+target 'YFEncrypt_Example' do
+  pod 'YFEncrypt', :path => '../'
+
+  target 'YFEncrypt_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
