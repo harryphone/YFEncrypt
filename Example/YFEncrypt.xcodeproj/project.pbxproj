@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		106339D12521B23000AB283D /* p.p12 in Resources */ = {isa = PBXBuildFile; fileRef = 106339CB2521B23000AB283D /* p.p12 */; };
+		106339D22521B23000AB283D /* rsacert.crt in Resources */ = {isa = PBXBuildFile; fileRef = 106339CC2521B23000AB283D /* rsacert.crt */; };
+		106339D32521B23000AB283D /* rsacert.csr in Resources */ = {isa = PBXBuildFile; fileRef = 106339CD2521B23000AB283D /* rsacert.csr */; };
+		106339D42521B23000AB283D /* rsacert.der in Resources */ = {isa = PBXBuildFile; fileRef = 106339CE2521B23000AB283D /* rsacert.der */; };
+		106339D52521B23000AB283D /* public.pem in Resources */ = {isa = PBXBuildFile; fileRef = 106339CF2521B23000AB283D /* public.pem */; };
+		106339D62521B23000AB283D /* private.pem in Resources */ = {isa = PBXBuildFile; fileRef = 106339D02521B23000AB283D /* private.pem */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -38,6 +44,12 @@
 
 /* Begin PBXFileReference section */
 		0DCA6A89D57D8AB0FFA9C211 /* YFEncrypt.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = YFEncrypt.podspec; path = ../YFEncrypt.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		106339CB2521B23000AB283D /* p.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = p.p12; sourceTree = "<group>"; };
+		106339CC2521B23000AB283D /* rsacert.crt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rsacert.crt; sourceTree = "<group>"; };
+		106339CD2521B23000AB283D /* rsacert.csr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rsacert.csr; sourceTree = "<group>"; };
+		106339CE2521B23000AB283D /* rsacert.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = rsacert.der; sourceTree = "<group>"; };
+		106339CF2521B23000AB283D /* public.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = public.pem; sourceTree = "<group>"; };
+		106339D02521B23000AB283D /* private.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = private.pem; sourceTree = "<group>"; };
 		12EDF27AF8FCD350FFFAE96C /* Pods-YFEncrypt_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YFEncrypt_Tests.release.xcconfig"; path = "Target Support Files/Pods-YFEncrypt_Tests/Pods-YFEncrypt_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		462A43B8763E0BCF74893A44 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* YFEncrypt_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YFEncrypt_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -148,6 +160,12 @@
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				6003F5A5195388D20070C39A /* YFViewController.h */,
 				6003F5A6195388D20070C39A /* YFViewController.m */,
+				106339CB2521B23000AB283D /* p.p12 */,
+				106339D02521B23000AB283D /* private.pem */,
+				106339CF2521B23000AB283D /* public.pem */,
+				106339CC2521B23000AB283D /* rsacert.crt */,
+				106339CD2521B23000AB283D /* rsacert.csr */,
+				106339CE2521B23000AB283D /* rsacert.der */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
@@ -275,9 +293,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				106339D52521B23000AB283D /* public.pem in Resources */,
+				106339D42521B23000AB283D /* rsacert.der in Resources */,
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
+				106339D32521B23000AB283D /* rsacert.csr in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
+				106339D62521B23000AB283D /* private.pem in Resources */,
+				106339D12521B23000AB283D /* p.p12 in Resources */,
+				106339D22521B23000AB283D /* rsacert.crt in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

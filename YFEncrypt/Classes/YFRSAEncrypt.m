@@ -164,7 +164,7 @@
     if (items) CFRelease(items);
 }
 
-- (void)loadPublicKeyFromPemFile:(NSString *)filePath keySize:(size_t )size {
+- (void)loadPublicKeyFromPemFile:(NSString *)filePath {
     [self clearPublicKeyRef];
     
     NSError *readFErr = nil;
@@ -173,16 +173,15 @@
     
     if (@available(iOS 10, *)) {
         pemStr = [self getContentOfKey:pemStr diffTitle:@"PUBLIC"];
-        NSData *dataPubKey = [[NSData alloc] initWithBase64EncodedString:pemStr options:0];
+        NSData *dataKey = [[NSData alloc] initWithBase64EncodedString:pemStr options:0];
         
-        NSMutableDictionary *dicPubkey = [[NSMutableDictionary alloc]initWithCapacity:3];
-        [dicPubkey setObject:(__bridge id)kSecAttrKeyTypeRSA forKey:(__bridge id)kSecAttrKeyType];
-        [dicPubkey setObject:(__bridge id) kSecAttrKeyClassPublic forKey:(__bridge id)kSecAttrKeyClass];
-        [dicPubkey setObject:@(size) forKey:(__bridge id)kSecAttrKeySizeInBits];
+        NSMutableDictionary *dickey = [[NSMutableDictionary alloc]initWithCapacity:2];
+        [dickey setObject:(__bridge id)kSecAttrKeyTypeRSA forKey:(__bridge id)kSecAttrKeyType];
+        [dickey setObject:(__bridge id) kSecAttrKeyClassPublic forKey:(__bridge id)kSecAttrKeyClass];
         
         NSError *error = nil;
         CFErrorRef ee = (__bridge CFErrorRef)error;
-        publicKeyRef = SecKeyCreateWithData((__bridge CFDataRef)dataPubKey, (__bridge CFDictionaryRef)dicPubkey, &ee);
+        publicKeyRef = SecKeyCreateWithData((__bridge CFDataRef)dataKey, (__bridge CFDictionaryRef)dickey, &ee);
         
         if (ee) {
             publicKeyRef = NULL;
@@ -197,7 +196,7 @@
     
 }
 
-- (void)loadPrivateKeyFromPemFile:(NSString *)filePath keySize:(size_t )size {
+- (void)loadPrivateKeyFromPemFile:(NSString *)filePath {
     [self clearPrivateKeyRef];
     
     NSError *readFErr = nil;
@@ -206,16 +205,15 @@
     
     if (@available(iOS 10, *)) {
         pemStr = [self getContentOfKey:pemStr diffTitle:@"PRIVATE"];
-        NSData *dataPubKey = [[NSData alloc]initWithBase64EncodedString:pemStr options:0];
+        NSData *dataKey = [[NSData alloc]initWithBase64EncodedString:pemStr options:0];
         
-        NSMutableDictionary *dicPubkey = [[NSMutableDictionary alloc] initWithCapacity:3];
-        [dicPubkey setObject:(__bridge id)kSecAttrKeyTypeRSA forKey:(__bridge id)kSecAttrKeyType];
-        [dicPubkey setObject:(__bridge id) kSecAttrKeyClassPrivate forKey:(__bridge id)kSecAttrKeyClass];
-        [dicPubkey setObject:@(size) forKey:(__bridge id)kSecAttrKeySizeInBits];
+        NSMutableDictionary *dickey = [[NSMutableDictionary alloc] initWithCapacity:2];
+        [dickey setObject:(__bridge id)kSecAttrKeyTypeRSA forKey:(__bridge id)kSecAttrKeyType];
+        [dickey setObject:(__bridge id) kSecAttrKeyClassPrivate forKey:(__bridge id)kSecAttrKeyClass];
         
         NSError *error = nil;
         CFErrorRef ee = (__bridge CFErrorRef)error;
-        privateKeyRef = SecKeyCreateWithData((__bridge CFDataRef)dataPubKey, (__bridge CFDictionaryRef)dicPubkey, &ee);
+        privateKeyRef = SecKeyCreateWithData((__bridge CFDataRef)dataKey, (__bridge CFDictionaryRef)dickey, &ee);
         
         
         if (ee) {

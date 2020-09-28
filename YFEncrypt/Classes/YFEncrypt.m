@@ -68,7 +68,7 @@
 /// 先base64的decode，不行在UTF8
 - (nullable NSData*)tryDecode {
     NSData *data = [self yf_base64Decode];
-    if (!data) {
+    if (data.length == 0) {
         data = [self dataUsingEncoding:NSUTF8StringEncoding];
     }
     return data;

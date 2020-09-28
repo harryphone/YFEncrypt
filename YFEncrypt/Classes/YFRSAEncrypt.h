@@ -49,8 +49,8 @@ typedef NS_ENUM(NSInteger, YFRSASignType) {
 - (void)loadP12File:(NSString *)filePath password:(NSString *)pwd;
 
 // Load the secret key from PEM
-- (void)loadPublicKeyFromPemFile:(NSString *)filePath keySize:(size_t )size;
-- (void)loadPrivateKeyFromPemFile:(NSString *)filePath keySize:(size_t )size;
+- (void)loadPublicKeyFromPemFile:(NSString *)filePath;
+- (void)loadPrivateKeyFromPemFile:(NSString *)filePath;
 
 // To obtain the public key
 - (nullable NSString *)getPublicKey;

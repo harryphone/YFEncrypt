@@ -6,6 +6,12 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ 本类中的key，优先进行Base64转换，转换失败才会进行utf8的转换。如果key是纯字母加数字的，并且是utf8格式的，请直接调用相应的加密类
+ 
+ In this class, Base64 conversion is preferred, UTF8 conversion is performed only if the Base64 conversion fails. If the key is pure alphabetic and numeric and is in UTF8 format, call the corresponding encryption class directly
+ */
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NSString (YFEncrypt)

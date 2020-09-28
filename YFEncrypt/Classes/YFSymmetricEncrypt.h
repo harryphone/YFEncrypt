@@ -75,7 +75,7 @@ typedef NS_ENUM(NSInteger, YFSymmetricEncryptType) {
 
 /*
  封装的便利方法，应用在业务中
- 秘钥通常是128或256位的随机Data，所以key为base64过的字符串表示。（如果key为utf8的，请用上方原始的方法，并记得设置keyLength）
+ 秘钥通常是128或256位的随机Data，所以key为base64过的字符串表示。（如果key为utf8的，请用上方原始的方法）
  加密过后的数据是一串无序Data，并不能用utf8表示，所以会用base64过的string传给服务端
  需要解密的string应该也是base64的string，原因同上一条
  解密后数据并没有做处理，data可能会转成字符串，也可能直接转成字典或数组。
