@@ -53,7 +53,6 @@
 
 #pragma mark - load the private or public key
 
-// 加载公钥
 - (void)loadPublicKey:(NSString *)key {
     key = [self getContentOfKey:key diffTitle:@"PUBLIC"];
     NSData *data = [self decodeBase64String:key];
@@ -66,7 +65,21 @@
 
 - (void)loadPublicData:(NSData *)keyData {
     [self clearPublicKeyRef];
-    publicKeyRef = [self addKeyData:keyData withTag:self.publicTag];
+    
+    NSMutableDictionary *dickey = [[NSMutableDictionary alloc] initWithCapacity:2];
+    [dickey setObject:(__bridge id)kSecAttrKeyTypeRSA forKey:(__bridge id)kSecAttrKeyType];
+    [dickey setObject:(__bridge id)kSecAttrKeyClassPublic forKey:(__bridge id)kSecAttrKeyClass];
+    
+    NSError *error = nil;
+    CFErrorRef ee = (__bridge CFErrorRef)error;
+    publicKeyRef = SecKeyCreateWithData((__bridge CFDataRef)keyData, (__bridge CFDictionaryRef)dickey, &ee);
+    
+    if (ee) {
+        publicKeyRef = NULL;
+        NSAssert(NO, @"failed to load public key");
+    } else {
+        [self addKeyRef:publicKeyRef withTag:self.publicTag];
+    }
 }
 
 - (void)loadPrivateKey:(NSString *)key {
@@ -81,7 +94,21 @@
 
 - (void)loadPrivateData:(NSData *)keyData {
     [self clearPrivateKeyRef];
-    privateKeyRef = [self addKeyData:keyData withTag:self.privateTag];
+    
+    NSMutableDictionary *dickey = [[NSMutableDictionary alloc] initWithCapacity:2];
+    [dickey setObject:(__bridge id)kSecAttrKeyTypeRSA forKey:(__bridge id)kSecAttrKeyType];
+    [dickey setObject:(__bridge id) kSecAttrKeyClassPrivate forKey:(__bridge id)kSecAttrKeyClass];
+    
+    NSError *error = nil;
+    CFErrorRef ee = (__bridge CFErrorRef)error;
+    privateKeyRef = SecKeyCreateWithData((__bridge CFDataRef)keyData, (__bridge CFDictionaryRef)dickey, &ee);
+    
+    if (ee) {
+        privateKeyRef = NULL;
+        NSAssert(NO, @"failed to load private key");
+    } else {
+        [self addKeyRef:privateKeyRef withTag:self.privateTag];
+    }
 }
 
 - (void)loadDerFile:(NSString *)filePath {
@@ -169,30 +196,9 @@
     
     NSError *readFErr = nil;
     NSString *pemStr = [NSString stringWithContentsOfFile:filePath encoding:NSASCIIStringEncoding error:&readFErr];
-    NSAssert(readFErr==nil, @"Pem file path is error");
+    NSAssert(readFErr == nil, @"Pem file path is error");
     
-    if (@available(iOS 10, *)) {
-        pemStr = [self getContentOfKey:pemStr diffTitle:@"PUBLIC"];
-        NSData *dataKey = [[NSData alloc] initWithBase64EncodedString:pemStr options:0];
-        
-        NSMutableDictionary *dickey = [[NSMutableDictionary alloc]initWithCapacity:2];
-        [dickey setObject:(__bridge id)kSecAttrKeyTypeRSA forKey:(__bridge id)kSecAttrKeyType];
-        [dickey setObject:(__bridge id) kSecAttrKeyClassPublic forKey:(__bridge id)kSecAttrKeyClass];
-        
-        NSError *error = nil;
-        CFErrorRef ee = (__bridge CFErrorRef)error;
-        publicKeyRef = SecKeyCreateWithData((__bridge CFDataRef)dataKey, (__bridge CFDictionaryRef)dickey, &ee);
-        
-        if (ee) {
-            publicKeyRef = NULL;
-            NSAssert(NO, @"Pem file failed to load");
-        } else {
-            [self addKeyRef:publicKeyRef withTag:self.publicTag];
-        }
-        
-    } else {
-        [self loadPublicKey:pemStr];
-    }
+    [self loadPublicKey:pemStr];
     
 }
 
@@ -201,31 +207,10 @@
     
     NSError *readFErr = nil;
     NSString *pemStr = [NSString stringWithContentsOfFile:filePath encoding:NSASCIIStringEncoding error:&readFErr];
-    NSAssert(readFErr==nil, @"Pem file path is error");
+    NSAssert(readFErr == nil, @"Pem file path is error");
     
-    if (@available(iOS 10, *)) {
-        pemStr = [self getContentOfKey:pemStr diffTitle:@"PRIVATE"];
-        NSData *dataKey = [[NSData alloc]initWithBase64EncodedString:pemStr options:0];
-        
-        NSMutableDictionary *dickey = [[NSMutableDictionary alloc] initWithCapacity:2];
-        [dickey setObject:(__bridge id)kSecAttrKeyTypeRSA forKey:(__bridge id)kSecAttrKeyType];
-        [dickey setObject:(__bridge id) kSecAttrKeyClassPrivate forKey:(__bridge id)kSecAttrKeyClass];
-        
-        NSError *error = nil;
-        CFErrorRef ee = (__bridge CFErrorRef)error;
-        privateKeyRef = SecKeyCreateWithData((__bridge CFDataRef)dataKey, (__bridge CFDictionaryRef)dickey, &ee);
-        
-        
-        if (ee) {
-            privateKeyRef = NULL;
-            NSAssert(NO, @"Pem file failed to load");
-        } else {
-            [self addKeyRef:privateKeyRef withTag:self.privateTag];
-        }
-        
-    } else {
-        [self loadPrivateKey:pemStr];
-    }
+    [self loadPrivateKey:pemStr];
+   
 }
 
 #pragma mark - Generate secret key pairs

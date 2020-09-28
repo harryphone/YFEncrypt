@@ -53,15 +53,6 @@
     return [[self yf_base64Decode] yf_AESDecryptByKey:key];
 }
 
-- (nullable NSString *)yf_RSAEncryptByKey:(NSString *)key {
-    NSData *data = [self tryDecode];
-    return [data yf_RSAEncryptByKey:key];
-}
-
-- (nullable NSData *)yf_RSADecryptByKey:(NSString *)key {
-    NSData *data = [self yf_base64Decode];
-    return [data yf_RSADecryptByKey:key];
-}
 
 #pragma mark - private method
 
@@ -125,17 +116,6 @@
     YFSymmetricEncrypt *encryptor = [[YFSymmetricEncrypt alloc] initWithType:YFSymmetricEncryptTypeAES];
     NSData *data = [encryptor operationData:self keyData:[key tryDecode] isEncrypt:NO];
     return data;
-}
-
-- (nullable NSString *)yf_RSAEncryptByKey:(NSString *)key {
-    YFRSAEncrypt *encryptor = [[YFRSAEncrypt alloc] init];
-    [encryptor loadPublicKey:key];
-    return [encryptor encryptData:self isPublicKey:YES];
-}
-- (nullable NSData *)yf_RSADecryptByKey:(NSString *)key {
-    YFRSAEncrypt *encryptor = [[YFRSAEncrypt alloc] init];
-    [encryptor loadPublicKey:key];
-    return [encryptor decryptData:self isPublicKey:YES];
 }
 
 #pragma mark - private method

@@ -30,8 +30,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable NSString *)yf_AESEncryptByKey:(NSString *)key;
 - (nullable NSData *)yf_AESDecryptByKey:(NSString *)key;
 
-- (nullable NSString *)yf_RSAEncryptByKey:(NSString *)key;
-- (nullable NSData *)yf_RSADecryptByKey:(NSString *)key;
 
 @end
 
@@ -54,8 +52,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable NSString *)yf_AESEncryptByKey:(NSString *)key;
 - (nullable NSData *)yf_AESDecryptByKey:(NSString *)key;
 
-- (nullable NSString *)yf_RSAEncryptByKey:(NSString *)key;
-- (nullable NSData *)yf_RSADecryptByKey:(NSString *)key;
 
 @end
 
